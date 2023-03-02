@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\sqs.publisher\sqs.publisher.csproj" />
+    <ProjectReference Include="..\sqs.consumer\sqs.consumer.csproj" />
   </ItemGroup>
 
 </Project>
