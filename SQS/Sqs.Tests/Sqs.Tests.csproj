@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.81" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.82" />
     <PackageReference Include="fluentassertions" Version="6.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\sqs.publisher\sqs.publisher.csproj" />
     <ProjectReference Include="..\sqs.consumer\sqs.consumer.csproj" />
+    <ProjectReference Include="..\Customers.Api\Customers.Api.csproj" />
   </ItemGroup>
 
 </Project>

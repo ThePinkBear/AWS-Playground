@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sqs.publisher", "sqs.publis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sqs.consumer", "sqs.consumer\sqs.consumer.csproj", "{473CAFD8-E8A6-4A97-BF3C-CAB0E11C5610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.Api", "Customers.Api\Customers.Api.csproj", "{2E9E5B80-82A5-4BBA-AB73-308C12E85C84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{473CAFD8-E8A6-4A97-BF3C-CAB0E11C5610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{473CAFD8-E8A6-4A97-BF3C-CAB0E11C5610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{473CAFD8-E8A6-4A97-BF3C-CAB0E11C5610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9E5B80-82A5-4BBA-AB73-308C12E85C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9E5B80-82A5-4BBA-AB73-308C12E85C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9E5B80-82A5-4BBA-AB73-308C12E85C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9E5B80-82A5-4BBA-AB73-308C12E85C84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
