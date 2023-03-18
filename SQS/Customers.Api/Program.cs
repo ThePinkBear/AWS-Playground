@@ -1,4 +1,6 @@
+using Amazon.SQS;
 using Customers.Api.Database;
+using Customers.Api.Messaging;
 using Customers.Api.Repositories;
 using Customers.Api.Services;
 using Customers.Api.Validation;
@@ -30,9 +32,24 @@ SqlMapper.RemoveTypeMap(typeof(Guid?));
 builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
     new SqliteConnectionFactory(config.GetValue<string>("Database:ConnectionString")!));
 builder.Services.AddSingleton<DatabaseInitializer>();
+
+builder.Services.Configure<QueueSettings>(builder.Configuration.GetSection(QueueSettings.Key));
+builder.Services.AddSingleton<IAmazonSQS, AmazonSQSClient>();
+builder.Services.AddSingleton<ISqsMessenger, SqsMessenger>();
+
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();
 builder.Services.AddSingleton<IGitHubService, GitHubService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .SetIsOriginAllowed((host) => true)
+            .AllowAnyHeader());
+});
 
 builder.Services.AddHttpClient("GitHub", httpClient =>
 {
@@ -55,6 +72,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseMiddleware<ValidationExceptionMiddleware>();
 app.MapControllers();
+app.UseCors("CorsPolicy");
 
 var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();
 await databaseInitializer.InitializeAsync();
