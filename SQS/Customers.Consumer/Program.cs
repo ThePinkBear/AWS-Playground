@@ -1,4 +1,5 @@
 using Customers.Consumer;
+using Amazon.SQS;
 
 var builder = WebApplication.CreateBuilder(args);
 

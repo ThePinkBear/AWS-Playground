@@ -1,5 +1,8 @@
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Customers.Consumer.Messages;
+using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace Customers.Consumer;
 
@@ -7,11 +10,13 @@ public class QueueConsumerService : BackgroundService
 {
   private readonly IAmazonSQS _sqs;
   private readonly IOptions<QueueSettings> _queueSettings;
+  private readonly IMediator _mediator;
 
-  public QueueConsumerService(IAmazonSQS sqs, IOptions queueSettings)
+  public QueueConsumerService(IAmazonSQS sqs, IOptions<QueueSettings> queueSettings, IMediator mediator)
   {
     _sqs = sqs;
     _queueSettings = queueSettings;
+    _mediator = mediator;
   }
   protected override async Task ExecuteAsync(CancellationToken stoppingToken)
   {
@@ -31,19 +36,9 @@ public class QueueConsumerService : BackgroundService
       foreach (var message in response.Messages)
       {
         var messageType = message.MessageAttributes["MessageType"];
-        switch (messageType)
-        {
-          case nameof(CustomerCreated):
-            var created = JsonSerializer.Deserialize<CustomerCreated>(message.Body);
-            // do shit with created here.
-            break;
-          case nameof(CustomerUpdated):
-          // var created = JsonSerializer.Deserialize<CustomerUpdated>();
-            break;
-          case nameof(CustomerDeleted):
-          //  var created = JsonSerializer.Deserialize<CustomerDeleted>();
-            break;
-        }
+        
+
+
         await _sqs.DeleteMessageAsync(queUrlResponse.QueueUrl, message.ReceiptHandle, stoppingToken);
       }
       await Task.Delay(1000, stoppingToken);
