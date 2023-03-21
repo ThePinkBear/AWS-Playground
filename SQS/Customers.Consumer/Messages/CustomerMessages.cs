@@ -1,8 +1,6 @@
-using MediatR;
-
 namespace Customers.Consumer.Messages;
 
-public class CustomerCreated : IRequest
+public class CustomerCreated : ISqsMessage
 {
   public required Guid Id { get; init; }
   public required string FullName { get; init; }
@@ -11,7 +9,7 @@ public class CustomerCreated : IRequest
   public required DateTime DateOfBirth { get; init; }
 }
 
-public class CustomerUpdated : IRequest
+public class CustomerUpdated : ISqsMessage
 {
   public required Guid Id { get; init; }
   public required string FullName { get; init; }
@@ -20,7 +18,7 @@ public class CustomerUpdated : IRequest
   public required DateTime DateOfBirth { get; init; }
 }
 
-public class CustomerDeleted : IRequest
+public class CustomerDeleted : ISqsMessage
 {
   public required Guid Id { get; init; }
 }
